@@ -31,7 +31,6 @@ export class DetailedPhotoComponent implements OnInit {
 
   search(event) {
     this.searchText = event.target.value;
-    console.log(event.target.value);
   }
 
   searchEnter() {

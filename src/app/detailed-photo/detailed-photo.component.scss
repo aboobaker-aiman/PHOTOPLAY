@@ -77,7 +77,14 @@
   }
 }
 
-@media screen and(max-width: 700px) {
+@media screen and(max-width: 900px) {
+  .image {
+    width: 200px !important;
+    height: 300px !important;
+  }
+  .like {
+    margin: 13px 0 0 50px !important;
+  }
   .mainContainer {
     .header {
       padding: 0 5px !important;
@@ -96,4 +103,5 @@
   .searchButtonConatin {
     margin: -76px 0% 0px 0px !important;
   }
+
 }

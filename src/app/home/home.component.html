@@ -171,10 +171,14 @@
           (click)="unlike(index, image, 'image')"
         />
       </div>
-      <div *ngIf="!favoriteVideos.length && !favoriteImages.length" class="noFavorites">
-        You Donot have any favorites Saved.
+      <div
+        *ngIf="!favoriteVideos.length && !favoriteImages.length"
+        class="noFavorites"
+      >
+        You don't have any favorites saved.
       </div>
     </div>
+    <div (click)="readMore()" class="readmore" *ngIf="readmodre">Read More</div>
   </div>
 </div>
 <app-footer></app-footer>

@@ -17,14 +17,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   selectedType = 'photos';
-  images: Pictures;
-  videos: Videos;
+  images;
+  videos;
+  videos1 = [];
+  images1 = [];
   headerBackground: Pictures;
   searchText = '';
   favoriteImageArray = new Array(15).fill(false);
   favoriteVideoArray = new Array(15).fill(false);
   favoriteImages: Pictures[] = [];
   favoriteVideos: Videos[] = [];
+  readmodre = true;
 
   constructor(
     private readonly photoViodeoService: PhotoVideoService,
@@ -33,67 +36,71 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // if (this.router.url.includes('video')) {
-    //   this.selectedType = 'videos';
-    //   this.route.params.subscribe(params => {
-    //     this.searchText = params.id;
-    //     this.searchDetails();
-    //     this.searchText = '';
-    //   });
-    // } else if (this.router.url.includes('photo')) {
-    //   this.selectedType = 'photos';
-    //   this.route.params.subscribe(params => {
-    //     this.searchText = params.id;
-    //     this.searchDetails();
-    //     this.searchText = '';
-    //   });
-    // } else {
-    //   this.photoViodeoService.getAllImages('animal').subscribe(
-    //     (res: any) => {
-    //       this.images = res;
-    //       // console.log(res);
-    //     },
-    //     (error: any) => {
-    //       window.alert(error);
-    //     }
-    //   );
-    // }
-    // this.photoViodeoService.getHeaderBackground().subscribe(
-    //   (res: any) => {
-    //     this.headerBackground = res[0].src.medium;
-    //     console.log(res[0].src.medium);
-    //   },
-    //   (error: any) => {
-    //     window.alert(error);
-    //   }
-    // );
+    if (this.router.url.includes('video')) {
+      this.selectedType = 'videos';
+      this.route.params.subscribe(params => {
+        this.searchText = params.id;
+        this.searchDetails();
+        this.searchText = '';
+      });
+    } else if (this.router.url.includes('photo')) {
+      this.selectedType = 'photos';
+      this.route.params.subscribe(params => {
+        this.searchText = params.id;
+        this.searchDetails();
+        this.searchText = '';
+      });
+    } else {
+      this.photoViodeoService.getAllImages('animal').subscribe(
+        (res: any) => {
+          this.images1 = res;
+          this.images = res.splice(10, 5);
+        },
+        (error: any) => {
+          window.alert(error);
+        }
+      );
+    }
+    this.photoViodeoService.getHeaderBackground().subscribe(
+      (res: any) => {
+        this.headerBackground = res[0].src.medium;
+      },
+      (error: any) => {
+        window.alert(error);
+      }
+    );
   }
 
   setSelectedType(type: string) {
+    let searchParam = 'animal';
     this.selectedType = type;
-    console.log(type);
+    this.readmodre = true;
 
+    if (this.searchText.length >= 3 ) {
+      searchParam = this.searchText;
+    }
     if (type === 'videos') {
-      this.photoViodeoService.getAllVideos('animal').subscribe(
+      this.photoViodeoService.getAllVideos(searchParam).subscribe(
         (res: any) => {
-          this.videos = res;
-          console.log(res);
+          this.videos1 = res;
+          this.videos = res.splice(10, 5);
         },
         (error: any) => {
           window.alert(error);
         }
       );
     } else if (type === 'photos') {
-      this.photoViodeoService.getAllImages('animal').subscribe(
+      this.photoViodeoService.getAllImages(searchParam).subscribe(
         (res: any) => {
-          this.images = res;
-          console.log(res);
+          this.images1 = res;
+          this.images = res.splice(10, 5);
         },
         (error: any) => {
           window.alert(error);
         }
       );
     } else {
+      this.readmodre = false;
       this.favoriteImages = this.photoViodeoService.getFavoriteImages();
       this.favoriteVideos = this.photoViodeoService.getFavoriteVideos();
     }
@@ -111,7 +118,6 @@ export class HomeComponent implements OnInit {
 
   search(event) {
     this.searchText = event.target.value;
-    console.log(event.target.value);
   }
 
   searchDetails() {
@@ -122,8 +128,8 @@ export class HomeComponent implements OnInit {
       if (this.selectedType === 'videos') {
         this.photoViodeoService.getAllVideos(this.searchText).subscribe(
           (res: any) => {
-            this.videos = res;
-            console.log(res);
+            this.videos1 = res;
+            this.videos = res.splice(10, 5);
           },
           (error: any) => {
             window.alert(error);
@@ -133,8 +139,8 @@ export class HomeComponent implements OnInit {
         this.selectedType = 'photos';
         this.photoViodeoService.getAllImages(this.searchText).subscribe(
           (res: any) => {
-            this.images = res;
-            console.log(res);
+            this.images1 = res;
+            this.images = res.splice(10, 5);
           },
           (error: any) => {
             window.alert(error);
@@ -163,6 +169,17 @@ export class HomeComponent implements OnInit {
     } else {
       this.photoViodeoService.setFavoriteVideos(data);
       this.favoriteVideoArray[index] = true;
+    }
+  }
+
+  readMore() {
+    if (this.selectedType === 'videos') {
+      this.videos = this.videos1;
+      this.readmodre = false;
+    } else if (this.selectedType === 'photos') {
+      this.images = this.images1;
+      this.readmodre = false;
+    } else {
     }
   }
 }

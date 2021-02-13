@@ -1,5 +1,4 @@
 .container {
-  // margin: 0 17.36%;
   margin: auto;
   width: 960px;
   .header {
@@ -92,6 +91,10 @@
     margin: 20%;
     font-size: 30px;
   }
+  .readmore {
+    text-align: center;
+    cursor: pointer;
+  }
 }
 
 // header
@@ -99,7 +102,6 @@
   height: 32.19%;
   width: 100%;
   background: black;
-  // background-image: url('./../../assets/Images/banner.png');
   background-repeat: no-repeat;
   background-size: 100%;
   .logo {
@@ -125,7 +127,6 @@
     text-align: center;
   }
   .searchContainer {
-    // margin: 0 auto;
     justify-content: center;
     margin-top: 1.08%;
     .search {
