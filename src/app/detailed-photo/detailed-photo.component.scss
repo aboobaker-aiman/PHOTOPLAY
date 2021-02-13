@@ -1,0 +1,99 @@
+.mainContainer {
+  min-height: calc(100vh - 119px);
+  .header {
+    padding: 0 17.36%;
+    background-color: #f3f3f3;
+    .logo {
+      padding: 30px 0 26px 0;
+    }
+    .search {
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+      background-color: #ffffff;
+      height: 44px;
+      width: 20.39%;
+      padding: 0 12px 0 12px;
+      border: 0;
+      outline: 0;
+      font-size: 16px;
+      right: 17.36%;
+      margin: 30px 0 26px 0;
+      position: absolute;
+    }
+    .searchButtonConatin {
+      position: absolute;
+      right: 0;
+      margin: -76px 17.39% 0px 0px;
+      background: #fff;
+      text-align: center;
+      .searchButton {
+        cursor: pointer;
+        height: 40px;
+        width: 87px;
+        border-radius: 2px;
+        background-color: #560014;
+        color: #fff;
+        border: 0;
+        margin: 2px;
+      }
+    }
+  }
+
+  .continer {
+    .image {
+      padding: 0 17.36%;
+      height: 522px;
+    }
+    .imageContainer{
+      text-align: center
+    }
+
+    .like {
+      padding: 0;
+      height: 19px;
+      width: 20px;
+      margin: 13px 0 0 200px;
+      cursor: pointer;
+    }
+    .photographerImage {
+      height: 31px;
+      width: 31px;
+      padding: 10px;
+    }
+    .photographerUrl {
+      text-align: center;
+      color: #000000;
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: 0;
+      line-height: 28px;
+    }
+    .photographerName {
+      color: #000000;
+      box-sizing: border-box;
+      padding: 15px;
+      font-size: 14px;
+    }
+  }
+}
+
+@media screen and(max-width: 700px) {
+  .mainContainer {
+    .header {
+      padding: 0 5px !important;
+    }
+
+    .continer {
+      .image {
+        padding: 0% !important;
+      }
+    }
+  }
+  .search {
+    width: 30% !important;
+    right: 13% !important;
+  }
+  .searchButtonConatin {
+    margin: -76px 0% 0px 0px !important;
+  }
+}

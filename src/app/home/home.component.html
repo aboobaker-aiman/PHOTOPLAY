@@ -1,0 +1,180 @@
+<!-- header -->
+<div
+  class="bannerContainer"
+  [style.background-image]="'url(' + headerBackground + ')'"
+>
+  <div class="logo">
+    <img src="./../../assets/Images/Logo.png" alt="logo" />
+  </div>
+  <div class="headerText1">Discover the world’s best photos & videos</div>
+  <div class="headerText2">Best memories online</div>
+  <div class="searchContainer flex">
+    <input
+      type="text"
+      class="search"
+      placeholder="Search photos, videos, artists"
+      (input)="search($event)"
+    />
+    <div class="searchButtonConatin">
+      <button
+        class="searchButton"
+        (click)="searchDetails()"
+        #myInput
+        id="myInput"
+      >
+        SEARCH
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- content -->
+<div class="container">
+  <div class="header flex">
+    <div
+      [ngClass]="{
+        selectedColor: selectedType === 'photos'
+      }"
+      (click)="setSelectedType('photos')"
+      class="headerText photos"
+    >
+      Photos
+    </div>
+    <div
+      [ngClass]="{
+        selectedColor: selectedType === 'videos'
+      }"
+      (click)="setSelectedType('videos')"
+      class="headerText videos"
+    >
+      Videos
+    </div>
+    <div
+      [ngClass]="{
+        selectedColor: selectedType === 'favorites'
+      }"
+      (click)="setSelectedType('favorites')"
+      class="headerText favorites"
+    >
+      Favorites
+    </div>
+  </div>
+
+  <div>
+    <div *ngIf="selectedType === 'photos'" class="files">
+      <div *ngFor="let image of images; index as index">
+        <img
+          [src]="image.src.small"
+          alt="image"
+          (click)="detailedPhoto(image)"
+        />
+        <img
+          src="./../../assets/Images/photographer.png"
+          alt="photographer"
+          class="photographerImage"
+        />
+
+        <div class="photographerName">{{ image.photographer }}</div>
+        <img
+          *ngIf="favoriteImageArray[index]"
+          src="./../../assets/Images/like.png"
+          alt="like"
+          class="like"
+          (click)="unlike(index, image, 'image')"
+        />
+
+        <img
+          *ngIf="!favoriteImageArray[index]"
+          src="./../../assets/Images/unlike.png"
+          alt="unlike"
+          class="like"
+          (click)="like(index, image, 'image')"
+        />
+      </div>
+    </div>
+
+    <div *ngIf="selectedType === 'videos'" class="files">
+      <div *ngFor="let video of videos; index as index">
+        <img [src]="video.video_pictures[0].picture" alt="video-image" />
+        <img
+          src="./../../assets/Images/photographer.png"
+          alt="photographer"
+          class="photographerImage"
+        />
+        <div class="photographerName">{{ video?.user?.name }}</div>
+        <img
+          src="./../../assets/Images/play.png"
+          alt="play"
+          (click)="detailedVideo(video)"
+          class="play"
+        />
+
+        <img
+          *ngIf="favoriteVideoArray[index]"
+          src="./../../assets/Images/like.png"
+          alt="like"
+          class="like"
+          (click)="unlike(index, video, 'video')"
+        />
+
+        <img
+          *ngIf="!favoriteVideoArray[index]"
+          src="./../../assets/Images/unlike.png"
+          alt="unlike"
+          class="like"
+          (click)="like(index, video, 'video')"
+        />
+      </div>
+    </div>
+
+    <div *ngIf="selectedType === 'favorites'" class="files">
+      <div *ngFor="let video of favoriteVideos; index as index">
+        <img [src]="video.video_pictures[0].picture" alt="video-image" />
+        <img
+          src="./../../assets/Images/photographer.png"
+          alt="photographer"
+          class="photographerImage"
+        />
+        <div class="photographerName">{{ video?.user?.name }}</div>
+        <img
+          src="./../../assets/Images/play.png"
+          alt="play"
+          (click)="detailedVideo(video)"
+          class="play"
+        />
+
+        <img
+          src="./../../assets/Images/like.png"
+          alt="like"
+          class="like"
+          (click)="unlike(index, video, 'video')"
+        />
+      </div>
+
+      <div *ngFor="let image of favoriteImages; index as index">
+        <img
+          [src]="image.src.small"
+          alt="image"
+          (click)="detailedPhoto(image)"
+        />
+        <img
+          src="./../../assets/Images/photographer.png"
+          alt="photographer"
+          class="photographerImage"
+        />
+
+        <div class="photographerName">{{ image.photographer }}</div>
+        <img
+          src="./../../assets/Images/like.png"
+          alt="like"
+          class="like"
+          (click)="unlike(index, image, 'image')"
+        />
+      </div>
+      <div *ngIf="!favoriteVideos.length && !favoriteImages.length" class="noFavorites">
+        You Donot have any favorites Saved.
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

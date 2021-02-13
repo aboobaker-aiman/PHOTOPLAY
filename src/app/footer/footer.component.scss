@@ -1,0 +1,19 @@
+.footer {
+  height: 89px;
+  width: 100%;
+  background-color: #f2f2f2;
+  box-shadow: 0 1px 0 0 #a7a8a9;
+  display: table;
+  margin-top: 30px;
+}
+.footerText{
+  color: #BABABA;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 28px;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+}

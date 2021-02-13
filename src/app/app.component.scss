@@ -1,0 +1,16 @@
+.loading {
+  position: absolute;
+  z-index: 1;
+  width: 100px;
+  height: 100px;
+  margin: 30% 50% 70% 50%;
+}
+@media screen and(max-width: 550px) {
+  .loading {
+    margin: 30% 65% 70% 35%;
+  }
+}
+
+// .content{
+//   min-height: calc(100vh - 50px - 32.19%);
+// }

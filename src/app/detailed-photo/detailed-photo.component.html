@@ -1,0 +1,47 @@
+<div class="mainContainer">
+  <div class="header">
+    <img src="./../../assets/Images/Logo1.png" alt="logo" class="logo" />
+    <input
+      type="text"
+      class="search"
+      placeholder="Search photos, videos, artists"
+      (input)="search($event)"
+    />
+    <div class="searchButtonConatin">
+      <button class="searchButton" (click)="searchEnter()">SEARCH</button>
+    </div>
+  </div>
+
+  <div class="continer">
+    <div class="photographerUrl">{{ fileDetails.photographer_url }}</div>
+    <div class="flex center">
+      <img
+        src="./../../assets/Images/photographer.png"
+        alt="photographer"
+        class="photographerImage"
+      />
+      <div class="photographerName">{{ fileDetails?.photographer }}</div>
+      <img
+        *ngIf="favoriteImage"
+        src="./../../assets/Images/like.png"
+        alt="like"
+        class="like"
+        (click)="unlike(fileDetails)"
+      />
+
+      <img
+        *ngIf="!favoriteImage"
+        src="./../../assets/Images/unlike.png"
+        alt="unlike"
+        class="like"
+        (click)="like(fileDetails)"
+      />
+    </div>
+
+    <div class="imageContainer">
+      <img class="image" [src]="fileDetails?.src?.large" alt="detailed-image" />
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
